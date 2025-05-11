@@ -1,0 +1,11 @@
+# Ignore the __paycahc__ directory
+__pycache__/
+# Ignore credentials.json
+token.json
+#Ignore virtual environment
+.venv/
+#Ignore jupyter notebook
+.ipynb_checkpoints
+
+#ignore *.ipynd
+*.ipynb
