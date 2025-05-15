@@ -48,7 +48,7 @@ class Service:
         amount = []
         fees = []
         avail_balance = []
-        info_dict = {}
+        df = {}
         for msg in self.__messages: 
             msg_detail = self.__service.users().messages().get(userId='me', id=msg['id']).execute()
             mail_body = msg_detail.get('payload','').get('body','').get('data','')
@@ -58,18 +58,15 @@ class Service:
             trans_no.append(self.__extract_data(trans_no_txt,trans_no_search_pattern,mail_body))
             amount.append(self.__extract_data(amount_txt,amount_search_pattern,mail_body))
             fees.append(self.__extract_data(fee_txt,fee_search_pattern,mail_body))
-            avail_balance.append(self.__extract_data(avail_bal_txt,avail_bal_search_pattern,mail_body))
         
-        info_dict = {
+        df = {
                         trans_date_txt : transact_date,
                         trans_no_txt : trans_no,
                         amount_txt : amount,
-                        fee_txt : fees,
-                        avail_bal_txt : avail_balance
+                        fee_txt : fees
                     }
-        print(info_dict)
     
-        return info_dict
+        return df
     
     def __extract_data(self,search_text,search_pattern,text):
         match = re.search(search_pattern, text)
