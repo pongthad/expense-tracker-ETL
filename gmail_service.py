@@ -51,7 +51,7 @@ class Service:
         amount = []
         fees = []
         df = {}
-        for msg in self.__messages[:5]: 
+        for msg in self.__messages: 
             msg_detail = self.__service.users().messages().get(userId='me', id=msg['id']).execute()
             mail_body = msg_detail.get('payload','').get('body','').get('data','')
             decoded_bytes = base64.urlsafe_b64decode(mail_body)
@@ -67,7 +67,6 @@ class Service:
                         amount_txt : amount,
                         fee_txt : fees
                     }
-        print(df)
         return df
     
     def __extract_data(self,search_pattern,text):
@@ -82,4 +81,5 @@ if __name__ == "__main__":
     service = Service()
     service.get_emails()
     emails = service.extract_email_body()
+    print(emails)
     
